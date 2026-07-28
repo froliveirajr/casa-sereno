@@ -17,8 +17,8 @@ export async function generateMetadata(): Promise<Metadata> {
     description:
       "Cestas de café da manhã, boxes, tábuas de frios e focaccias artesanais em Recife e região metropolitana.",
     icons: {
-      icon: "/images/logo-reference.jpg",
-      shortcut: "/images/logo-reference.jpg",
+      icon: "/images/receber-bem-logo-oficial.png",
+      shortcut: "/images/receber-bem-logo-oficial.png",
     },
     openGraph: {
       title: "Receber Bem",

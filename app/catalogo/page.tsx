@@ -8,10 +8,9 @@ export const metadata: Metadata = { title: "Catálogo" };
 export default function CatalogoPage() {
   return (
     <main className="catalog-page">
-      <header className="simple-header">
+      <header className="simple-header catalog-header">
         <Link className="brand" href="/">
-          <Image src="/images/logo-reference.jpg" alt="Receber Bem" width={58} height={58} />
-          <span><strong>Receber Bem</strong><small>presentes & experiências</small></span>
+          <Image src="/images/receber-bem-logo-oficial.png" alt="Receber Bem" width={200} height={200} />
         </Link>
         <Link className="text-link" href="/">← Voltar ao início</Link>
       </header>
