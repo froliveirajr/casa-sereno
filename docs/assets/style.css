@@ -40,7 +40,9 @@ button, input, textarea, select { font: inherit; }
 .site-header nav { display: flex; gap: 26px; color: var(--ink-soft); font-size: .83rem; }
 .site-header nav a:hover, .site-footer nav a:hover { color: var(--sage-dark); }
 .header-actions { display: flex; align-items: center; gap: 16px; }
-.admin-entry { color: var(--sage-dark); font-size: .72rem; font-weight: 800; text-decoration: underline; text-underline-offset: 4px; }
+.admin-entry { min-height: 40px; padding: 0 15px; border: 1px solid var(--line); border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; color: var(--sage-dark); background: rgba(255,255,255,.56); font-size: .7rem; font-weight: 800; white-space: nowrap; }
+.admin-entry::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--wine); box-shadow: 0 0 0 4px rgba(150,104,19,.1); }
+.admin-entry-short { display: none; }
 .button {
   min-height: 48px; padding: 0 22px; border: 1px solid var(--sage-dark); border-radius: 999px;
   display: inline-flex; align-items: center; justify-content: center; background: var(--sage-dark); color: white;
@@ -401,7 +403,11 @@ button, input, textarea, select { font: inherit; }
   .admin-nav a { padding: 8px 11px; font-size: .65rem; }
   .site-header .button { min-height: 38px; padding: 0 13px; font-size: .66rem; }
   .header-actions { gap: 8px; }
-  .admin-entry { max-width: 76px; font-size: .58rem; line-height: 1.25; text-align: right; }
+  .header-actions { gap: 7px; }
+  .admin-entry { min-height: 38px; padding: 0 11px; gap: 7px; font-size: .64rem; }
+  .admin-entry-full { display: none; }
+  .admin-entry-short { display: inline; }
+  .site-header .button-compact { min-height: 38px; padding-inline: 13px; font-size: .67rem; }
   .hero { padding: 42px 20px 74px; gap: 42px; }
   .hero h1 { font-size: clamp(3rem, 16vw, 4.6rem); }
   .hero-highlight { margin-top: .08em; }

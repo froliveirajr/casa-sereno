@@ -28,7 +28,10 @@ export default function Home() {
           <Link href="#como-funciona">Como funciona</Link>
         </nav>
         <div className="header-actions">
-          <Link className="admin-entry" href="/admin">Área administrativa</Link>
+          <Link className="admin-entry" href="/admin">
+            <span className="admin-entry-full">Área administrativa</span>
+            <span className="admin-entry-short">Admin</span>
+          </Link>
           <Link className="button button-compact" href="/pedido">Fazer pedido</Link>
         </div>
       </header>
