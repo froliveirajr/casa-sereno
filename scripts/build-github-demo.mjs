@@ -1,4 +1,5 @@
 import { cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
 import path from "node:path";
 
 const root = process.cwd();
@@ -26,8 +27,11 @@ for (const file of ["og.png", "favicon.svg"]) {
 
 let css = await readFile(path.join(root, "app", "globals.css"), "utf8");
 css = css.replace(/^@import\s+"tailwindcss";\s*/m, "");
+const cssVersion = createHash("sha256").update(css).digest("hex").slice(0, 10);
 await writeFile(path.join(output, "assets", "style.css"), css);
-await cp(path.join(root, "scripts", "github-demo.js"), path.join(output, "assets", "demo.js"));
+const demoScript = await readFile(path.join(root, "scripts", "github-demo.js"), "utf8");
+const scriptVersion = createHash("sha256").update(demoScript).digest("hex").slice(0, 10);
+await writeFile(path.join(output, "assets", "demo.js"), demoScript);
 await writeFile(path.join(output, ".nojekyll"), "");
 
 for (const route of routes) {
@@ -37,12 +41,12 @@ for (const route of routes) {
   html = html
     .replace(/<script\b[\s\S]*?<\/script>/gi, "")
     .replace(/<link\s+rel="modulepreload"[^>]*>/gi, "")
-    .replace(/<link\s+rel="stylesheet"[^>]*>/gi, `<link rel="stylesheet" href="${base}/assets/style.css"/>`)
+    .replace(/<link\s+rel="stylesheet"[^>]*>/gi, `<link rel="stylesheet" href="${base}/assets/style.css?v=${cssVersion}"/>`)
     .replaceAll("http://localhost:3000", siteUrl)
     .replace(/(href|src)="\/(?!\/|casa-sereno\/)/g, `$1="${base}/`)
     .replace(new RegExp(`${base}/signout-with-chatgpt\\?return_to=%2F`, "g"), `${base}/`)
     .replace(/>Sair<\/a>/g, ">Voltar ao site</a>")
-    .replace("</body>", `<script src="${base}/assets/demo.js"></script></body>`);
+    .replace("</body>", `<script src="${base}/assets/demo.js?v=${scriptVersion}"></script></body>`);
   const directory = route === "/" ? output : path.join(output, route.slice(1));
   await mkdir(directory, { recursive: true });
   await writeFile(path.join(directory, "index.html"), html);
