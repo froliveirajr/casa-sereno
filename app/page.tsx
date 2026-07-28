@@ -9,9 +9,9 @@ export default function Home() {
   return (
     <main>
       <div className="announcement">
-        <span>Feito artesanalmente em Recife</span>
+        <span>Detalhes não fazem a diferença. Fazem tudo.</span>
         <span className="announcement-dot" aria-hidden="true" />
-        <span>Entregas em Recife e região metropolitana</span>
+        <span>Cestas • Boxes • Tábuas • Focaccias</span>
       </div>
 
       <header className="site-header">
@@ -197,7 +197,7 @@ export default function Home() {
       <footer className="site-footer">
         <div className="brand footer-brand">
           <Image src="/images/logo-reference.jpg" alt="" width={54} height={54} />
-          <span><strong>Receber Bem</strong><small>Recife • Pernambuco</small></span>
+          <span><strong>Receber Bem</strong><small>Detalhes não fazem a diferença. Fazem tudo.</small></span>
         </div>
         <p>Cestas de café da manhã, boxes, tábuas e focaccias artesanais.</p>
         <nav aria-label="Links do rodapé">
