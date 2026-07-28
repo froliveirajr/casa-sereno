@@ -173,8 +173,8 @@ export default function Home() {
       <section className="story-section">
         <div className="story-photo">
           <Image
-            src="/images/dia-dos-avos-cesta-inteira.png"
-            alt="Cesta completa com café, flores, caneca e laço artesanal"
+            src="/images/dia-dos-avos.jpg"
+            alt="Composição presenteável com café, caneca, flores e biscoitos"
             fill
             sizes="(max-width: 760px) 100vw, 48vw"
           />
