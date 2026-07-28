@@ -77,7 +77,7 @@ export function ProductCart({ products, initialSlug }: { products: Product[]; in
           </div>
         )}
         <div className="cart-total">
-          <span>Total dos itens com preço publicado</span>
+          <span>Total</span>
           <strong>{formatProductPrice(knownTotal)}</strong>
           {hasConsultationItem && <small>+ itens com valor sob consulta</small>}
         </div>
