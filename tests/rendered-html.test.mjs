@@ -10,23 +10,25 @@ async function render(path = "/") {
   }, { waitUntil() {}, passThroughOnException() {} });
 }
 
-test("server-renders the Receber Bem storefront", async () => {
+test("server-renders the Casa Sereno storefront", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
   const html = await response.text();
-  assert.match(html, /Receber Bem/);
-  assert.match(html, /Presentes que transformam cuidado em memória/);
+  assert.match(html, /Casa Sereno/);
+  assert.match(html, /Presentes que/);
+  assert.match(html, /transformam cuidado/);
   assert.match(html, /Box Essencial/);
-  assert.match(html, /Catálogo em preparação/);
+  assert.match(html, /Novo catálogo disponível/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape|react-loading-skeleton/i);
 });
 
-test("server-renders the demonstration catalog", async () => {
+test("server-renders the current catalog", async () => {
   const response = await render("/catalogo");
   assert.equal(response.status, 200);
   const html = await response.text();
-  assert.match(html, /Catálogo demonstrativo/);
+  assert.match(html, /Catálogo Casa Sereno/);
   assert.match(html, /Focaccia artesanal/);
-  assert.match(html, /nenhum preço foi inferido do Instagram/);
+  assert.match(html, /R\$ 275,00/);
+  assert.match(html, /disponibilidade, frete e eventuais substituições/);
 });

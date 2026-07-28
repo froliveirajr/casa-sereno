@@ -1,9 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
-import { categories, occasions, products } from "./data/catalog";
+import { categories, formatProductPrice, occasions, products } from "./data/catalog";
 
 const whatsappUrl =
-  "https://wa.me/5581999982391?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Receber%20Bem.";
+  "https://wa.me/5581999982391?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Casa%20Sereno.";
 
 export default function Home() {
   return (
@@ -11,17 +10,16 @@ export default function Home() {
       <div className="announcement">
         <span>Detalhes não fazem a diferença. Fazem tudo.</span>
         <span className="announcement-dot" aria-hidden="true" />
-        <span>Cestas • Boxes • Tábuas • Focaccias</span>
+        <span>Boxes • Tábuas • Artesanais • Experiências personalizadas</span>
       </div>
 
       <header className="site-header">
-        <Link className="brand" href="/" aria-label="Receber Bem — página inicial">
-          <Image
-            src="/images/receber-bem-logo-oficial.png"
-            alt="Receber Bem"
-            width={200}
-            height={200}
-            priority
+        <Link className="brand" href="/" aria-label="Casa Sereno — página inicial">
+          <img
+            src="/images/casa-sereno-logo.png"
+            alt="Casa Sereno"
+            width={130}
+            height={130}
           />
         </Link>
         <nav aria-label="Navegação principal">
@@ -29,15 +27,17 @@ export default function Home() {
           <Link href="#ocasioes">Ocasiões</Link>
           <Link href="#como-funciona">Como funciona</Link>
         </nav>
-        <a className="button button-compact" href={whatsappUrl} target="_blank" rel="noreferrer">
-          Falar no WhatsApp
-        </a>
+        <Link className="button button-compact" href="/pedido">Fazer pedido</Link>
       </header>
 
       <section className="hero">
         <div className="hero-copy">
-          <p className="eyebrow">Cestas, tábuas e sabores feitos com intenção</p>
-          <h1>Presentes que transformam cuidado em memória.</h1>
+          <p className="eyebrow">Experiências que ficam</p>
+          <h1>
+            Presentes que
+            <span className="hero-highlight">transformam cuidado</span>
+            em memória.
+          </h1>
           <p className="hero-lead">
             Cada composição nasce das escolhas, do tempo e dos pequenos detalhes —
             para fazer alguém se sentir verdadeiramente especial.
@@ -53,28 +53,23 @@ export default function Home() {
           <div className="hero-note">
             <span aria-hidden="true">✦</span>
             <p>
-              <strong>Catálogo em preparação.</strong> Os produtos desta versão são
-              demonstrativos e os preços ainda estão em validação.
+              <strong>Novo catálogo disponível.</strong> Valores, composições e condições
+              são confirmados pela equipe antes do pagamento.
             </p>
           </div>
         </div>
 
-        <div className="hero-gallery" aria-label="Composições da Receber Bem">
+        <div className="hero-gallery" aria-label="Composições da Casa Sereno">
           <figure className="hero-photo hero-photo-main">
-            <Image
-              src="/images/box-essencial.jpg"
-              alt="Box Essencial com frutas, biscoitos, café e itens delicadamente organizados"
-              fill
-              sizes="(max-width: 860px) 82vw, 36vw"
-              priority
+            <img
+              src="/images/catalog/box-essencial.jpg"
+              alt="Box Essencial da Casa Sereno"
             />
           </figure>
           <figure className="hero-photo hero-photo-secondary">
-            <Image
-              src="/images/tabua-artesanal.jpg"
-              alt="Tábua artesanal com queijos, frutas, frios e castanhas"
-              fill
-              sizes="(max-width: 860px) 42vw, 18vw"
+            <img
+              src="/images/catalog/tabua-frios.jpg"
+              alt="Tábua de frios da Casa Sereno"
             />
           </figure>
           <div className="hero-seal">
@@ -112,24 +107,24 @@ export default function Home() {
           </Link>
         </div>
         <div className="product-grid">
-          {products.map((product) => (
+          {products.slice(0, 6).map((product) => (
             <article className="product-card" key={product.slug}>
-              <div className="product-image">
-                <Image src={product.image} alt={product.imageAlt} fill sizes="(max-width: 760px) 92vw, 30vw" />
+              <Link className="product-image product-detail-link" href={`/catalogo/${product.slug}`} aria-label={`Ver detalhes de ${product.name}`}>
+                <img src={product.image} alt={product.imageAlt} loading="lazy" />
                 <span className={`status status-${product.statusTone}`}>{product.status}</span>
-              </div>
+              </Link>
               <div className="product-body">
                 <p className="product-kicker">{product.eyebrow}</p>
-                <h3>{product.name}</h3>
+                <h3><Link href={`/catalogo/${product.slug}`}>{product.name}</Link></h3>
                 <p>{product.description}</p>
                 <div className="tag-list" aria-label="Características">
                   {product.tags.map((tag) => <span key={tag}>{tag}</span>)}
                 </div>
                 <div className="product-footer">
-                  <span>Preço em validação</span>
-                  <a href={whatsappUrl} target="_blank" rel="noreferrer" aria-label={`Consultar ${product.name} no WhatsApp`}>
-                    Consultar <span aria-hidden="true">→</span>
-                  </a>
+                  <span>{formatProductPrice(product.priceCents)}</span>
+                  <Link href={`/pedido?produto=${product.slug}`} aria-label={`Pedir ${product.name}`}>
+                    Fazer pedido <span aria-hidden="true">→</span>
+                  </Link>
                 </div>
               </div>
             </article>
@@ -168,16 +163,15 @@ export default function Home() {
 
       <section className="story-section">
         <div className="story-photo">
-          <Image
+          <img
             src="/images/dia-dos-avos.jpg"
             alt="Composição presenteável com café, caneca, flores e biscoitos"
-            fill
-            sizes="(max-width: 760px) 100vw, 48vw"
+            loading="lazy"
           />
         </div>
         <blockquote>
           <p>“Não é apenas sobre o que vai dentro da caixa. É sobre o que ela faz quem recebe sentir.”</p>
-          <cite>Receber Bem</cite>
+          <cite>Casa Sereno</cite>
         </blockquote>
       </section>
 
@@ -192,9 +186,9 @@ export default function Home() {
 
       <footer className="site-footer">
         <div className="brand footer-brand">
-          <Image src="/images/receber-bem-logo-oficial.png" alt="Receber Bem" width={140} height={140} />
+          <img src="/images/casa-sereno-logo.png" alt="Casa Sereno" width={140} height={140} loading="lazy" />
         </div>
-        <p>Cestas de café da manhã, boxes, tábuas e focaccias artesanais.</p>
+        <p>Boxes, tábuas, sabores artesanais e experiências personalizadas.</p>
         <nav aria-label="Links do rodapé">
           <a href="https://www.instagram.com/receberbem_decor/" target="_blank" rel="noreferrer">Instagram</a>
           <a href={whatsappUrl} target="_blank" rel="noreferrer">WhatsApp</a>

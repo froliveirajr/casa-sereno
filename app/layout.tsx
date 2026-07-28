@@ -11,27 +11,27 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: {
-      default: "Receber Bem | Presentes e experiências em Recife",
-      template: "%s | Receber Bem",
+      default: "Casa Sereno | Experiências que ficam",
+      template: "%s | Casa Sereno",
     },
     description:
-      "Cestas de café da manhã, boxes, tábuas de frios e focaccias artesanais em Recife e região metropolitana.",
+      "Boxes, tábuas de frios, focaccias e experiências personalizadas para celebrar momentos especiais.",
     icons: {
-      icon: "/images/receber-bem-logo-oficial.png",
-      shortcut: "/images/receber-bem-logo-oficial.png",
+      icon: "/images/casa-sereno-sublogo.png",
+      shortcut: "/images/casa-sereno-sublogo.png",
     },
     openGraph: {
-      title: "Receber Bem",
-      description: "Presentes que transformam cuidado em memória.",
+      title: "Casa Sereno",
+      description: "Experiências que ficam.",
       type: "website",
       locale: "pt_BR",
       url: origin,
-      images: [{ url: socialImage, width: 1200, height: 630, alt: "Receber Bem — presentes e experiências em Recife" }],
+      images: [{ url: socialImage, width: 1200, height: 630, alt: "Casa Sereno — experiências que ficam" }],
     },
     twitter: {
       card: "summary_large_image",
-      title: "Receber Bem",
-      description: "Presentes que transformam cuidado em memória.",
+      title: "Casa Sereno",
+      description: "Experiências que ficam.",
       images: [socialImage],
     },
   };

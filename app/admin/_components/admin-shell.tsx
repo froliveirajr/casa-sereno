@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { chatGPTSignOutPath, requireChatGPTUser } from "../../chatgpt-auth";
 
@@ -16,8 +15,8 @@ export async function AdminShell({ currentPath, children }: { currentPath: strin
     <main className="admin-page">
       <header className="simple-header admin-header">
         <Link className="brand" href="/admin">
-          <Image src="/images/receber-bem-logo.svg" alt="Receber Bem" width={60} height={60} />
-          <span><strong>Receber Bem</strong><small>painel operacional</small></span>
+          <img className="admin-brand-logo" src="/images/casa-sereno-sublogo.png" alt="Casa Sereno" width={88} height={88} />
+          <span><strong>Casa Sereno</strong><small>painel operacional</small></span>
         </Link>
         <div className="admin-user"><strong>{user.displayName}</strong><a href={chatGPTSignOutPath("/")}>Sair</a></div>
       </header>

@@ -70,7 +70,7 @@ export async function createProduct(formData: FormData) {
     categoryId: category.id,
     name,
     slug: productSlug,
-    description: textValue(formData, "description") || "Produto artesanal Receber Bem.",
+    description: textValue(formData, "description") || "Produto artesanal Casa Sereno.",
     operationalType: textValue(formData, "operationalType") === "batch" ? "batch" : "made_to_order",
     minimumLeadMinutes: intValue(formData, "minimumLeadHours", 24) * 60,
     basePriceCents: moneyToCents(textValue(formData, "price")),
