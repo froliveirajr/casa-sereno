@@ -15,7 +15,11 @@ const routes = ["/", "/catalogo", "/pedido", "/admin", "/admin/produtos", "/admi
 
 await rm(output, { recursive: true, force: true });
 await mkdir(path.join(output, "assets"), { recursive: true });
-await cp(path.join(root, "public", "images"), path.join(output, "images"), { recursive: true });
+await mkdir(path.join(output, "images"), { recursive: true });
+await cp(path.join(root, "public", "images", "catalog"), path.join(output, "images", "catalog"), { recursive: true });
+for (const image of ["casa-sereno-logo.png", "casa-sereno-sublogo.png", "dia-dos-avos.jpg"]) {
+  await cp(path.join(root, "public", "images", image), path.join(output, "images", image));
+}
 for (const file of ["og.png", "favicon.svg"]) {
   try { await cp(path.join(root, "public", file), path.join(output, file)); } catch {}
 }
