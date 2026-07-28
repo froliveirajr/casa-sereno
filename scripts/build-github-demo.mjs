@@ -39,7 +39,7 @@ for (const route of routes) {
     .replace(/<link\s+rel="modulepreload"[^>]*>/gi, "")
     .replace(/<link\s+rel="stylesheet"[^>]*>/gi, `<link rel="stylesheet" href="${base}/assets/style.css"/>`)
     .replaceAll("http://localhost:3000", siteUrl)
-    .replace(/(href|src)="\/(?!\/)/g, `$1="${base}/`)
+    .replace(/(href|src)="\/(?!\/|casa-sereno\/)/g, `$1="${base}/`)
     .replace(new RegExp(`${base}/signout-with-chatgpt\\?return_to=%2F`, "g"), `${base}/`)
     .replace(/>Sair<\/a>/g, ">Voltar ao site</a>")
     .replace("</body>", `<script src="${base}/assets/demo.js"></script></body>`);
