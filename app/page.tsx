@@ -17,10 +17,10 @@ export default function Home() {
       <header className="site-header">
         <Link className="brand" href="/" aria-label="Receber Bem — página inicial">
           <Image
-            src="/images/logo-reference.jpg"
+            src="/images/receber-bem-logo.svg"
             alt="Receber Bem"
-            width={64}
-            height={64}
+            width={96}
+            height={96}
             priority
           />
           <span>
@@ -196,7 +196,7 @@ export default function Home() {
 
       <footer className="site-footer">
         <div className="brand footer-brand">
-          <Image src="/images/logo-reference.jpg" alt="" width={54} height={54} />
+          <Image src="/images/receber-bem-logo.svg" alt="" width={68} height={68} />
           <span><strong>Receber Bem</strong><small>Detalhes não fazem a diferença. Fazem tudo.</small></span>
         </div>
         <p>Cestas de café da manhã, boxes, tábuas e focaccias artesanais.</p>

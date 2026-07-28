@@ -29,9 +29,10 @@ button, input, textarea, select { font: inherit; }
   text-transform: uppercase; text-align: center;
 }
 .announcement-dot { width: 3px; height: 3px; border-radius: 50%; background: #d9c7c9; flex: 0 0 auto; }
-.site-header { max-width: 1260px; margin: 0 auto; padding: 18px 32px; display: flex; align-items: center; gap: 36px; }
+.site-header { max-width: 1260px; margin: 0 auto; padding: 10px 32px; display: flex; align-items: center; gap: 36px; }
 .brand { display: inline-flex; align-items: center; gap: 12px; margin-right: auto; }
-.brand img { border-radius: 50%; border: 1px solid var(--line); }
+.brand img { border-radius: 50%; border: 1px solid var(--line); flex: 0 0 auto; }
+.site-header .brand img { width: 96px; height: 96px; }
 .brand span { display: grid; gap: 1px; }
 .brand strong { font-family: var(--display); font-size: 1.25rem; font-weight: 500; letter-spacing: -.02em; }
 .brand small { color: var(--ink-soft); font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; }
@@ -184,7 +185,8 @@ button, input, textarea, select { font: inherit; }
 @media (max-width: 680px) {
   .announcement { font-size: .58rem; }
   .announcement span:first-child, .announcement-dot { display: none; }
-  .site-header { padding: 13px 18px; }
+  .site-header { padding: 9px 18px; }
+  .site-header .brand img { width: 72px; height: 72px; }
   .brand strong { font-size: 1.05rem; }
   .brand small { display: none; }
   .site-header .button { min-height: 38px; padding: 0 13px; font-size: .66rem; }
