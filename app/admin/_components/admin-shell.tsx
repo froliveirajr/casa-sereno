@@ -10,19 +10,24 @@ const links = [
 ] as const;
 
 export async function AdminShell({ currentPath, children }: { currentPath: string; children: React.ReactNode }) {
-  const user = await requireChatGPTUser(currentPath);
+  await requireChatGPTUser(currentPath);
   return (
     <main className="admin-page">
-      <header className="simple-header admin-header">
-        <Link className="brand" href="/admin">
-          <img className="admin-brand-logo" src="/images/casa-sereno-sublogo.png" alt="Casa Sereno" width={88} height={88} />
-          <span><strong>Casa Sereno</strong><small>painel operacional</small></span>
-        </Link>
-        <div className="admin-user"><strong>{user.displayName}</strong><a href={chatGPTSignOutPath("/")}>Sair</a></div>
+      <header className="admin-header">
+        <div className="admin-header-inner">
+          <Link className="admin-brand" href="/admin">
+            <img className="admin-brand-logo" src="/images/casa-sereno-sublogo.png" alt="Casa Sereno" width={64} height={64} />
+            <span><small>Casa Sereno</small><strong>Painel administrativo</strong></span>
+          </Link>
+          <nav className="admin-nav" aria-label="Módulos operacionais">
+            {links.map(([label, href]) => <Link key={href} href={href} aria-current={currentPath === href ? "page" : undefined}>{label}</Link>)}
+          </nav>
+          <div className="admin-user">
+            <span><i aria-hidden="true" />Acesso interno</span>
+            <a href={chatGPTSignOutPath("/")}>Sair</a>
+          </div>
+        </div>
       </header>
-      <nav className="admin-nav" aria-label="Módulos operacionais">
-        {links.map(([label, href]) => <Link key={href} href={href} aria-current={currentPath === href ? "page" : undefined}>{label}</Link>)}
-      </nav>
       <div className="admin-shell">{children}</div>
     </main>
   );
