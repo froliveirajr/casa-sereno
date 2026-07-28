@@ -53,7 +53,10 @@ export function ProductCart({ products, initialSlug }: { products: Product[]; in
 
       <aside className="cart-summary" aria-label="Carrinho do pedido">
         <div className="cart-summary-heading">
-          <div><p className="eyebrow">Seu carrinho</p><h3>{selectedItems.length ? `${selectedItems.length} ${selectedItems.length === 1 ? "item escolhido" : "itens escolhidos"}` : "Escolha os produtos acima"}</h3></div>
+          <div>
+            <p className="eyebrow">Seu carrinho</p>
+            {selectedItems.length > 0 && <h3>{`${selectedItems.length} ${selectedItems.length === 1 ? "item escolhido" : "itens escolhidos"}`}</h3>}
+          </div>
           {selectedItems.length > 0 && <button type="button" onClick={() => setCart({})}>Limpar carrinho</button>}
         </div>
         {selectedItems.length === 0 ? (
