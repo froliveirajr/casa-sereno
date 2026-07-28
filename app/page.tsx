@@ -27,7 +27,10 @@ export default function Home() {
           <Link href="#ocasioes">Ocasiões</Link>
           <Link href="#como-funciona">Como funciona</Link>
         </nav>
-        <Link className="button button-compact" href="/pedido">Fazer pedido</Link>
+        <div className="header-actions">
+          <Link className="admin-entry" href="/admin">Área administrativa</Link>
+          <Link className="button button-compact" href="/pedido">Fazer pedido</Link>
+        </div>
       </header>
 
       <section className="hero">
