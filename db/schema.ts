@@ -63,6 +63,59 @@ export const batches = sqliteTable("batches", {
   ...timestamps,
 });
 
+export const inventoryItems = sqliteTable("inventory_items", {
+  id: text("id").primaryKey(),
+  name: text("name").notNull(),
+  sku: text("sku").notNull().unique(),
+  kind: text("kind", { enum: ["ingredient", "packaging", "finished_good"] }).notNull(),
+  unit: text("unit", { enum: ["unit", "gram", "milliliter"] }).notNull(),
+  currentQuantity: integer("current_quantity").notNull().default(0),
+  minimumQuantity: integer("minimum_quantity").notNull().default(0),
+  averageUnitCostCents: integer("average_unit_cost_cents").notNull().default(0),
+  active: integer("active", { mode: "boolean" }).notNull().default(true),
+  ...timestamps,
+});
+
+export const inventoryMovements = sqliteTable("inventory_movements", {
+  id: text("id").primaryKey(),
+  itemId: text("item_id").notNull().references(() => inventoryItems.id),
+  type: text("type", { enum: ["entry", "consumption", "adjustment", "loss"] }).notNull(),
+  quantityDelta: integer("quantity_delta").notNull(),
+  reason: text("reason").notNull(),
+  actorEmail: text("actor_email").notNull(),
+  occurredAt: integer("occurred_at", { mode: "timestamp" }).notNull(),
+  createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+}, (table) => [index("inventory_movements_item_idx").on(table.itemId, table.occurredAt)]);
+
+export const recipes = sqliteTable("recipes", {
+  id: text("id").primaryKey(),
+  productId: text("product_id").notNull().references(() => products.id),
+  variantId: text("variant_id").references(() => productVariants.id),
+  yieldQuantity: integer("yield_quantity").notNull().default(1),
+  notes: text("notes"),
+  ...timestamps,
+});
+
+export const recipeItems = sqliteTable("recipe_items", {
+  id: text("id").primaryKey(),
+  recipeId: text("recipe_id").notNull().references(() => recipes.id),
+  inventoryItemId: text("inventory_item_id").notNull().references(() => inventoryItems.id),
+  quantityRequired: integer("quantity_required").notNull(),
+  ...timestamps,
+}, (table) => [index("recipe_items_recipe_idx").on(table.recipeId)]);
+
+export const batchProducts = sqliteTable("batch_products", {
+  id: text("id").primaryKey(),
+  batchId: text("batch_id").notNull().references(() => batches.id),
+  productId: text("product_id").notNull().references(() => products.id),
+  variantId: text("variant_id").references(() => productVariants.id),
+  plannedQuantity: integer("planned_quantity").notNull(),
+  reservedQuantity: integer("reserved_quantity").notNull().default(0),
+  producedQuantity: integer("produced_quantity").notNull().default(0),
+  unitPriceCents: integer("unit_price_cents").notNull(),
+  ...timestamps,
+}, (table) => [index("batch_products_batch_idx").on(table.batchId)]);
+
 export const orders = sqliteTable("orders", {
   id: text("id").primaryKey(),
   code: text("code").notNull().unique(),
